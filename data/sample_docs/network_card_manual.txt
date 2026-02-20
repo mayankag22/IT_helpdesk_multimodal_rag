@@ -1,0 +1,72 @@
+NETWORK CARD TROUBLESHOOTING MANUAL
+Model: TurboNIC-X4000
+Version: 3.2 | Last Updated: 2024-01
+
+═══════════════════════════════════════
+SECTION 1: LED INDICATOR REFERENCE
+═══════════════════════════════════════
+
+1.1 Link/Activity LED (Left)
+────────────────────────────
+- OFF:              No cable or no power
+- Solid Green:      Link established at 1 Gbps
+- Blinking Green:   Active data transfer
+- Solid Amber:      Link established at 100 Mbps
+- Blinking Amber:   PCIe link negotiation in progress; if persists >30s = failure (Error 0x4F)
+- Fast Blink Amber: Hardware fault — replace card
+
+1.2 Speed LED (Right)
+─────────────────────
+- OFF:   10/100 Mbps mode
+- ON:    1 Gbps mode
+- Blink: 10 Gbps mode (if supported)
+
+═══════════════════════════════════════
+SECTION 2: POST DIAGNOSTIC CODES
+═══════════════════════════════════════
+
+The TurboNIC-X4000 reports initialisation status via POST codes
+readable on the motherboard's diagnostic display:
+
+  0x4A  PCIe slot power OK
+  0x4B  PCIe link training started
+  0x4C  PCIe Gen1 fallback attempted
+  0x4D  PCIe Gen2 fallback attempted
+  0x4E  PCIe Gen3 fallback attempted
+  0x4F  PCIe link negotiation FAILED — all generations exhausted
+
+If 0x4F is displayed:
+  1. Power off completely (unplug from wall)
+  2. Wait 30 seconds
+  3. Firmly reseat the card in its PCIe x4 or x16 slot
+  4. Reconnect power
+  5. Enter BIOS → Advanced → PCIe Configuration
+  6. Set PCIe speed to "Gen 2" as a compatibility fallback
+  7. Save and exit
+
+═══════════════════════════════════════
+SECTION 3: DRIVER INSTALLATION
+═══════════════════════════════════════
+
+Linux (Ubuntu/Debian):
+  sudo apt install turbonet-dkms
+
+Linux (RHEL/CentOS):
+  sudo yum install turbonet-kmod
+
+Windows:
+  Run setup.exe from the driver CD or download from vendor site.
+
+After installation, verify:
+  Linux:   lspci | grep TurboNIC
+  Windows: Device Manager → Network Adapters
+
+═══════════════════════════════════════
+SECTION 4: SPECIFICATIONS
+═══════════════════════════════════════
+
+Interface:    PCIe x4 Gen 3
+Speeds:       10/100/1000 Mbps (auto-negotiate)
+Wake-on-LAN:  Supported
+OS Support:   Linux 4.x+, Windows 10/11, FreeBSD 12+
+Power:        3.3V / 4.3W max

@@ -1,0 +1,87 @@
+SERVER OPERATIONS ERROR REFERENCE
+Infrastructure Team — Internal KB
+Version: 2.1
+
+═══════════════════════════════════════
+STORAGE ERRORS
+═══════════════════════════════════════
+
+DISKFULL
+  Severity: HIGH
+  Symptom:  Writes fail; applications log "No space left on device"
+  Diagnosis:
+    df -h                          # find full volume
+    du -sh /var/log/* | sort -rh   # find largest log dirs
+    ncdu /                         # interactive disk usage browser
+  Resolution:
+    1. Archive old logs to cold storage
+    2. Rotate and compress: logrotate -f /etc/logrotate.conf
+    3. If /var full: move docker volumes to /data
+    4. Extend LVM volume:
+       lvextend -L +20G /dev/vg0/var
+       resize2fs /dev/vg0/var
+
+═══════════════════════════════════════
+MEMORY ERRORS
+═══════════════════════════════════════
+
+ERR_OUT_OF_MEMORY (OOM)
+  Severity: HIGH
+  Symptom:  Processes killed by OOM killer; "Cannot allocate memory" in logs
+  Diagnosis:
+    free -h                         # total / used / available
+    cat /proc/meminfo | grep -i avail
+    dmesg | grep -i "oom"           # OOM killer log
+    ps aux --sort=-%mem | head -20  # top memory consumers
+  Resolution:
+    1. Restart the leaking process immediately
+    2. Add swap if not present:
+       fallocate -l 4G /swapfile
+       chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile
+    3. Set vm.swappiness=10 in /etc/sysctl.conf
+    4. Long-term: profile with valgrind or heaptrack
+
+═══════════════════════════════════════
+THERMAL ERRORS
+═══════════════════════════════════════
+
+THERMAL_SHUTDOWN
+  Severity: CRITICAL
+  Symptom:  Unexpected power-off; IPMI/BMC logs "CPU over temperature"
+  Diagnosis:
+    ipmitool sensor list | grep -i temp
+    sensors                          # lm_sensors (install if absent)
+  Resolution:
+    1. Check physical airflow — are vents blocked?
+    2. Verify all case fans are spinning (visual check + IPMI)
+    3. Clean heatsinks with compressed air
+    4. Re-apply thermal compound if CPU temp >85°C at idle
+    5. Adjust fan curve in BIOS/IPMI if available
+    6. Consider adding hot-aisle/cold-aisle containment in rack
+
+═══════════════════════════════════════
+HTTP / PROXY ERRORS
+═══════════════════════════════════════
+
+HTTP 502 Bad Gateway
+  Severity: HIGH
+  Symptom:  Clients see "502 Bad Gateway"; upstream not responding
+  Diagnosis:
+    tail -f /var/log/nginx/error.log
+    curl -I http://backend-service:8080/health
+  Resolution:
+    1. Confirm upstream service is running:
+       systemctl status backend-service
+    2. Check upstream health endpoint responds
+    3. Increase nginx upstream timeout if latency spiked:
+       proxy_read_timeout 120s;
+    4. Restart upstream: systemctl restart backend-service
+
+HTTP 503 Service Unavailable
+  Severity: HIGH
+  Symptom:  Server returns 503; often accompanied by high CPU/RAM
+  Resolution:
+    1. Check server load: uptime && top
+    2. Review application error logs
+    3. Scale horizontally if CPU bound
+    4. Disable maintenance mode in app config if set accidentally

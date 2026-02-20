@@ -1,0 +1,41 @@
+# ── Secrets ───────────────────────────────────────────────
+.env
+
+# ── Python ────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ── Virtual Environments ──────────────────────────────────
+.venv/
+venv/
+env/
+
+# ── Data & Indexes (large, generated) ────────────────────
+services/vector_store/chroma_db/
+services/mcp_server/data/error_codes.db
+data/uploads/*
+!data/uploads/.gitkeep
+evaluation/results/
+
+# ── Ollama model cache ────────────────────────────────────
+.ollama/
+
+# ── IDE ───────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.swp
+
+# ── OS ────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Logs ─────────────────────────────────────────────────
+*.log
+runs.jsonl

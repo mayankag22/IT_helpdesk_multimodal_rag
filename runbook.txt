@@ -1,0 +1,14 @@
+First time setup
+copy .env.example .env
+docker compose up ollama -d
+"C:\Program Files\Git\bin\bash.exe" scripts/setup.sh        # pulls ~10 GB of models once
+python scripts/seed_error_db.py
+docker compose up --build
+# → http://localhost:8501
+
+
+Subsequent runs
+docker compose up ollama -d
+"C:\Program Files\Git\bin\bash.exe" scripts/setup.sh        # pulls ~10 GB of models once
+python scripts/seed_error_db.py
+docker compose up --build

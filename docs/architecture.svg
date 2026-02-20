@@ -1,0 +1,229 @@
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1565C0"/>
+    </marker>
+    <marker id="arrow-dash" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
+    </marker>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#F8F9FA" rx="12"/>
+
+  <!-- Title -->
+  <text x="600" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#1A1A2E">🤖 Multimodal Agentic RAG — Technical Troubleshooter</text>
+  <text x="600" y="58" text-anchor="middle" font-size="12" fill="#666">Architecture Diagram · Docker Compose · Fully Local · Zero Cloud Cost</text>
+
+  <!-- ═══ SECTION 1: INPUT LAYER ═══ -->
+  <rect x="20" y="75" width="220" height="175" rx="10" fill="#E1F5FE" stroke="#01579B" stroke-width="2" filter="url(#shadow)"/>
+  <text x="130" y="97" text-anchor="middle" font-size="12" font-weight="700" fill="#01579B">📥 INPUT LAYER</text>
+  <line x1="30" y1="103" x2="230" y2="103" stroke="#01579B" stroke-width="1" opacity="0.4"/>
+
+  <rect x="35" y="113" width="190" height="34" rx="6" fill="#fff" stroke="#90CAF9" stroke-width="1.5"/>
+  <text x="130" y="128" text-anchor="middle" font-size="11" font-weight="600" fill="#1565C0">📑 PDF Manuals / Schematics</text>
+  <text x="130" y="141" text-anchor="middle" font-size="10" fill="#555">PyMuPDF · 512-token chunks</text>
+
+  <rect x="35" y="155" width="190" height="34" rx="6" fill="#fff" stroke="#90CAF9" stroke-width="1.5"/>
+  <text x="130" y="170" text-anchor="middle" font-size="11" font-weight="600" fill="#1565C0">🖼️ Screenshots / Images</text>
+  <text x="130" y="183" text-anchor="middle" font-size="10" fill="#555">LLaVA:7b Vision → Text</text>
+
+  <rect x="35" y="197" width="190" height="34" rx="6" fill="#fff" stroke="#90CAF9" stroke-width="1.5"/>
+  <text x="130" y="212" text-anchor="middle" font-size="11" font-weight="600" fill="#1565C0">💬 Text Symptoms</text>
+  <text x="130" y="225" text-anchor="middle" font-size="10" fill="#555">Error codes · Free-form text</text>
+
+  <!-- ═══ SECTION 2: PROCESSING ═══ -->
+  <rect x="265" y="75" width="220" height="175" rx="10" fill="#F3E5F5" stroke="#4A148C" stroke-width="2" filter="url(#shadow)"/>
+  <text x="375" y="97" text-anchor="middle" font-size="12" font-weight="700" fill="#4A148C">⚙️ PROCESSING PIPELINE</text>
+  <line x1="275" y1="103" x2="475" y2="103" stroke="#4A148C" stroke-width="1" opacity="0.4"/>
+
+  <rect x="280" y="113" width="190" height="34" rx="6" fill="#fff" stroke="#CE93D8" stroke-width="1.5"/>
+  <text x="375" y="128" text-anchor="middle" font-size="11" font-weight="600" fill="#6A1B9A">🔪 Text Chunker</text>
+  <text x="375" y="141" text-anchor="middle" font-size="10" fill="#555">RecursiveCharacterTextSplitter</text>
+
+  <rect x="280" y="155" width="190" height="34" rx="6" fill="#fff" stroke="#CE93D8" stroke-width="1.5"/>
+  <text x="375" y="170" text-anchor="middle" font-size="11" font-weight="600" fill="#6A1B9A">🧠 Embedding Model</text>
+  <text x="375" y="183" text-anchor="middle" font-size="10" fill="#555">nomic-embed-text · Ollama</text>
+
+  <rect x="280" y="197" width="87" height="34" rx="6" fill="#fff" stroke="#CE93D8" stroke-width="1.5"/>
+  <text x="323" y="212" text-anchor="middle" font-size="10" font-weight="600" fill="#6A1B9A">📊 ChromaDB</text>
+  <text x="323" y="225" text-anchor="middle" font-size="9" fill="#555">Vector Store</text>
+
+  <rect x="382" y="197" width="88" height="34" rx="6" fill="#fff" stroke="#CE93D8" stroke-width="1.5"/>
+  <text x="426" y="212" text-anchor="middle" font-size="10" font-weight="600" fill="#6A1B9A">📈 BM25</text>
+  <text x="426" y="225" text-anchor="middle" font-size="9" fill="#555">Keyword Index</text>
+
+  <!-- ═══ DOCKER COMPOSE OUTER BOX ═══ -->
+  <rect x="510" y="65" width="670" height="700" rx="12" fill="#E8F5E9" stroke="#1B5E20" stroke-width="2.5" filter="url(#shadow)" stroke-dasharray="8,4"/>
+  <text x="530" y="85" font-size="11" font-weight="700" fill="#1B5E20">🐳 Docker Compose Environment</text>
+
+  <!-- ═══ MCP SERVER CONTAINER ═══ -->
+  <rect x="530" y="95" width="290" height="255" rx="10" fill="#FFF8E1" stroke="#F57F17" stroke-width="2" filter="url(#shadow)"/>
+  <text x="675" y="117" text-anchor="middle" font-size="12" font-weight="700" fill="#E65100">🔧 MCP SERVER CONTAINER</text>
+  <line x1="540" y1="123" x2="810" y2="123" stroke="#F57F17" stroke-width="1" opacity="0.4"/>
+  <text x="675" y="139" text-anchor="middle" font-size="10" fill="#777">FastAPI · Port 8000 · SQLite</text>
+
+  <rect x="545" y="148" width="260" height="38" rx="6" fill="#fff" stroke="#FFB74D" stroke-width="1.5"/>
+  <text x="675" y="164" text-anchor="middle" font-size="11" font-weight="600" fill="#E65100">🔍 search_error_code(code)</text>
+  <text x="675" y="179" text-anchor="middle" font-size="10" fill="#555">SQLite lookup · Primary resolution</text>
+
+  <rect x="545" y="194" width="260" height="38" rx="6" fill="#fff" stroke="#FFB74D" stroke-width="1.5"/>
+  <text x="675" y="210" text-anchor="middle" font-size="11" font-weight="600" fill="#E65100">📖 get_manual_section(id)</text>
+  <text x="675" y="225" text-anchor="middle" font-size="10" fill="#555">Pre-indexed manual retrieval</text>
+
+  <rect x="545" y="240" width="260" height="38" rx="6" fill="#fff" stroke="#FFB74D" stroke-width="1.5"/>
+  <text x="675" y="256" text-anchor="middle" font-size="11" font-weight="600" fill="#E65100">⚙️ run_diagnostic(snippet)</text>
+  <text x="675" y="271" text-anchor="middle" font-size="10" fill="#555">RestrictedPython REPL sandbox</text>
+
+  <rect x="545" y="286" width="260" height="38" rx="6" fill="#FFECB3" stroke="#FFB74D" stroke-width="1.5"/>
+  <text x="675" y="302" text-anchor="middle" font-size="11" font-weight="600" fill="#E65100">🗄️ error_codes.db</text>
+  <text x="675" y="317" text-anchor="middle" font-size="10" fill="#555">SQLite · seeded error-fix pairs</text>
+
+  <!-- ═══ STREAMLIT UI CONTAINER ═══ -->
+  <rect x="840" y="95" width="320" height="650" rx="10" fill="#E8EAF6" stroke="#283593" stroke-width="2" filter="url(#shadow)"/>
+  <text x="1000" y="117" text-anchor="middle" font-size="12" font-weight="700" fill="#1A237E">💻 STREAMLIT UI CONTAINER</text>
+  <line x1="850" y1="123" x2="1150" y2="123" stroke="#283593" stroke-width="1" opacity="0.4"/>
+  <text x="1000" y="139" text-anchor="middle" font-size="10" fill="#777">Port 8501 · LangGraph State Machine</text>
+
+  <!-- Supervisor -->
+  <rect x="855" y="148" width="290" height="58" rx="8" fill="#C5CAE9" stroke="#3949AB" stroke-width="2"/>
+  <text x="1000" y="168" text-anchor="middle" font-size="12" font-weight="700" fill="#1A237E">🧠 SUPERVISOR AGENT</text>
+  <text x="1000" y="184" text-anchor="middle" font-size="10" fill="#333">Intent classification · Error code extraction</text>
+  <text x="1000" y="198" text-anchor="middle" font-size="10" fill="#333">Dynamic routing · LangGraph state machine</text>
+
+  <!-- Agents row -->
+  <rect x="855" y="220" width="136" height="70" rx="6" fill="#fff" stroke="#5C6BC0" stroke-width="1.5"/>
+  <text x="923" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#283593">📥 Ingestion</text>
+  <text x="923" y="255" text-anchor="middle" font-size="9" fill="#555">PDF · Image</text>
+  <text x="923" y="268" text-anchor="middle" font-size="9" fill="#555">Text → ChromaDB</text>
+  <text x="923" y="281" text-anchor="middle" font-size="9" fill="#777">ingestion_agent.py</text>
+
+  <rect x="1009" y="220" width="136" height="70" rx="6" fill="#fff" stroke="#5C6BC0" stroke-width="1.5"/>
+  <text x="1077" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#283593">👁️ Vision</text>
+  <text x="1077" y="255" text-anchor="middle" font-size="9" fill="#555">LLaVA:7b local</text>
+  <text x="1077" y="268" text-anchor="middle" font-size="9" fill="#555">Image → Text ctx</text>
+  <text x="1077" y="281" text-anchor="middle" font-size="9" fill="#777">vision_agent.py</text>
+
+  <rect x="855" y="304" width="136" height="70" rx="6" fill="#fff" stroke="#5C6BC0" stroke-width="1.5"/>
+  <text x="923" y="324" text-anchor="middle" font-size="10" font-weight="700" fill="#283593">🗂️ RAG Agent</text>
+  <text x="923" y="339" text-anchor="middle" font-size="9" fill="#555">ChromaDB + BM25</text>
+  <text x="923" y="352" text-anchor="middle" font-size="9" fill="#555">Cross-encoder rerank</text>
+  <text x="923" y="365" text-anchor="middle" font-size="9" fill="#777">rag_agent.py</text>
+
+  <rect x="1009" y="304" width="136" height="70" rx="6" fill="#fff" stroke="#5C6BC0" stroke-width="1.5"/>
+  <text x="1077" y="324" text-anchor="middle" font-size="10" font-weight="700" fill="#283593">🔧 MCP Agent</text>
+  <text x="1077" y="339" text-anchor="middle" font-size="9" fill="#555">HTTP client</text>
+  <text x="1077" y="352" text-anchor="middle" font-size="9" fill="#555">→ MCP server:8000</text>
+  <text x="1077" y="365" text-anchor="middle" font-size="9" fill="#777">mcp_agent.py</text>
+
+  <!-- Web search -->
+  <rect x="855" y="388" width="290" height="50" rx="6" fill="#fff" stroke="#5C6BC0" stroke-width="1.5"/>
+  <text x="1000" y="407" text-anchor="middle" font-size="10" font-weight="700" fill="#283593">🌐 Web Search Agent (Tertiary)</text>
+  <text x="1000" y="422" text-anchor="middle" font-size="9" fill="#555">DuckDuckGo free · Tavily optional · web_search_agent.py</text>
+
+  <!-- LLM Generator -->
+  <rect x="855" y="452" width="290" height="50" rx="8" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/>
+  <text x="1000" y="471" text-anchor="middle" font-size="11" font-weight="700" fill="#0D47A1">🎯 LLM GENERATOR</text>
+  <text x="1000" y="487" text-anchor="middle" font-size="10" fill="#333">llama3.1:8b or mistral:7b · Ollama · qa_chain.py</text>
+
+  <!-- Critic -->
+  <rect x="855" y="516" width="290" height="65" rx="8" fill="#FCE4EC" stroke="#880E4F" stroke-width="2"/>
+  <text x="1000" y="536" text-anchor="middle" font-size="11" font-weight="700" fill="#880E4F">⚖️ CRITIC AGENT</text>
+  <text x="1000" y="552" text-anchor="middle" font-size="10" fill="#555">Faithfulness · Relevance · Confidence score</text>
+  <text x="1000" y="566" text-anchor="middle" font-size="10" fill="#555">🟢 HIGH · 🟡 MEDIUM · 🔴 LOW</text>
+  <text x="1000" y="580" text-anchor="middle" font-size="9" fill="#777">critic_agent.py · threshold 0.70</text>
+
+  <!-- Streamlit UI -->
+  <rect x="855" y="596" width="290" height="55" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1000" y="616" text-anchor="middle" font-size="11" font-weight="700" fill="#1B5E20">💬 STREAMLIT CHAT UI</text>
+  <text x="1000" y="632" text-anchor="middle" font-size="10" fill="#555">Upload sidebar · Agent trace panel</text>
+  <text x="1000" y="646" text-anchor="middle" font-size="9" fill="#777">streamlit_app.py · localhost:8501</text>
+
+  <!-- ═══ MONITORING ═══ -->
+  <rect x="530" y="375" width="290" height="175" rx="10" fill="#FCE4EC" stroke="#880E4F" stroke-width="2" filter="url(#shadow)"/>
+  <text x="675" y="397" text-anchor="middle" font-size="12" font-weight="700" fill="#880E4F">📊 MONITORING &amp; EVAL</text>
+  <line x1="540" y1="403" x2="810" y2="403" stroke="#880E4F" stroke-width="1" opacity="0.4"/>
+
+  <rect x="545" y="413" width="260" height="34" rx="6" fill="#fff" stroke="#F48FB1" stroke-width="1.5"/>
+  <text x="675" y="428" text-anchor="middle" font-size="11" font-weight="600" fill="#880E4F">⏱️ Latency Tracking</text>
+  <text x="675" y="441" text-anchor="middle" font-size="10" fill="#555">Per-agent step timing · runs.jsonl</text>
+
+  <rect x="545" y="455" width="260" height="34" rx="6" fill="#fff" stroke="#F48FB1" stroke-width="1.5"/>
+  <text x="675" y="470" text-anchor="middle" font-size="11" font-weight="600" fill="#880E4F">📈 Retrieval Metrics</text>
+  <text x="675" y="483" text-anchor="middle" font-size="10" fill="#555">Precision@k · MRR · eval_rag.py</text>
+
+  <rect x="545" y="497" width="260" height="34" rx="6" fill="#fff" stroke="#F48FB1" stroke-width="1.5"/>
+  <text x="675" y="512" text-anchor="middle" font-size="11" font-weight="600" fill="#880E4F">📝 Audit Logs</text>
+  <text x="675" y="525" text-anchor="middle" font-size="10" fill="#555">LangSmith optional · logging_config.py</text>
+
+  <!-- ═══ FALLBACK CHAIN LEGEND ═══ -->
+  <rect x="530" y="568" width="290" height="145" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+  <text x="675" y="588" text-anchor="middle" font-size="12" font-weight="700" fill="#E65100">🔁 FALLBACK CHAIN</text>
+  <line x1="540" y1="594" x2="810" y2="594" stroke="#E65100" stroke-width="1" opacity="0.4"/>
+
+  <rect x="545" y="603" width="260" height="24" rx="4" fill="#C8E6C9" stroke="#388E3C" stroke-width="1"/>
+  <text x="675" y="619" text-anchor="middle" font-size="10" font-weight="700" fill="#1B5E20">① MCP Server (Primary — SQLite lookup)</text>
+
+  <text x="675" y="640" text-anchor="middle" font-size="14" fill="#999">↓ score &lt; 0.70</text>
+
+  <rect x="545" y="647" width="260" height="24" rx="4" fill="#FFF9C4" stroke="#F9A825" stroke-width="1"/>
+  <text x="675" y="663" text-anchor="middle" font-size="10" font-weight="700" fill="#F57F17">② RAG Agent (Secondary — ChromaDB+BM25)</text>
+
+  <text x="675" y="683" text-anchor="middle" font-size="14" fill="#999">↓ score &lt; 0.70</text>
+
+  <rect x="545" y="690" width="260" height="24" rx="4" fill="#FFCCBC" stroke="#E64A19" stroke-width="1"/>
+  <text x="675" y="706" text-anchor="middle" font-size="10" font-weight="700" fill="#BF360C">③ Web Search (Tertiary — DuckDuckGo)</text>
+
+  <!-- ═══ ARROWS ═══ -->
+  <!-- Input → Processing -->
+  <line x1="240" y1="140" x2="262" y2="140" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="240" y1="172" x2="262" y2="158" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="240" y1="214" x2="262" y2="175" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Processing → Docker (Streamlit ingestion) -->
+  <line x1="485" y1="155" x2="508" y2="248" stroke="#4A148C" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Supervisor → Agents -->
+  <line x1="1000" y1="206" x2="960" y2="220" stroke="#3949AB" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="1000" y1="206" x2="1040" y2="220" stroke="#3949AB" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="1000" y1="206" x2="960" y2="304" stroke="#3949AB" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="1000" y1="206" x2="1040" y2="304" stroke="#3949AB" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- MCP Agent → MCP Server (cross-container) -->
+  <line x1="1009" y1="339" x2="820" y2="230" stroke="#E65100" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="5,3"/>
+
+  <!-- Agents → LLM -->
+  <line x1="1000" y1="374" x2="1000" y2="452" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- LLM → Critic -->
+  <line x1="1000" y1="502" x2="1000" y2="516" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Critic → UI -->
+  <line x1="1000" y1="581" x2="1000" y2="596" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Monitoring dashed lines -->
+  <line x1="840" y1="560" x2="820" y2="460" stroke="#999" stroke-width="1" marker-end="url(#arrow-dash)" stroke-dasharray="4,3"/>
+  <line x1="840" y1="430" x2="820" y2="430" stroke="#999" stroke-width="1" marker-end="url(#arrow-dash)" stroke-dasharray="4,3"/>
+
+  <!-- Web search external call indicator -->
+  <rect x="20" y="700" width="480" height="60" rx="8" fill="#F5F5F5" stroke="#BDBDBD" stroke-width="1.5"/>
+  <text x="260" y="720" text-anchor="middle" font-size="11" font-weight="700" fill="#424242">💡 All models run locally via Ollama · Zero cloud cost by default</text>
+  <text x="260" y="738" text-anchor="middle" font-size="10" fill="#666">llama3.1:8b generation · llava:7b vision · nomic-embed-text embeddings</text>
+  <text x="260" y="754" text-anchor="middle" font-size="10" fill="#666">Optional escalation: GPT-4o Vision · Claude Haiku · Tavily Search</text>
+
+  <!-- Port labels -->
+  <rect x="530" y="775" width="130" height="24" rx="4" fill="#FFF3E0" stroke="#FF8F00" stroke-width="1"/>
+  <text x="595" y="791" text-anchor="middle" font-size="10" font-weight="600" fill="#E65100">MCP Server → :8000</text>
+
+  <rect x="680" y="775" width="130" height="24" rx="4" fill="#E8EAF6" stroke="#3949AB" stroke-width="1"/>
+  <text x="745" y="791" text-anchor="middle" font-size="10" font-weight="600" fill="#1A237E">Streamlit UI → :8501</text>
+
+  <rect x="830" y="775" width="130" height="24" rx="4" fill="#E8F5E9" stroke="#388E3C" stroke-width="1"/>
+  <text x="895" y="791" text-anchor="middle" font-size="10" font-weight="600" fill="#1B5E20">API Docs → :8000/docs</text>
+</svg>

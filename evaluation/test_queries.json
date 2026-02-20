@@ -1,0 +1,42 @@
+[
+  {
+    "query": "My network card shows error 0x4F on boot with an amber blinking LED.",
+    "expected_source_tier": "mcp"
+  },
+  {
+    "query": "The device throws ERR_LINK_DOWN after resume from sleep.",
+    "expected_source_tier": "mcp"
+  },
+  {
+    "query": "Server disk is full and writes are failing — DISKFULL error in logs.",
+    "expected_source_tier": "mcp"
+  },
+  {
+    "query": "Getting HTTP 502 bad gateway errors from our nginx reverse proxy.",
+    "expected_source_tier": "mcp"
+  },
+  {
+    "query": "Windows BSOD with stop code 0xC000021A after Windows Update.",
+    "expected_source_tier": "mcp"
+  },
+  {
+    "query": "What does the amber blinking LED on a network card indicate?",
+    "expected_source_tier": "rag"
+  },
+  {
+    "query": "How do I configure PCIe slot speed in BIOS?",
+    "expected_source_tier": "rag"
+  },
+  {
+    "query": "What are the POST diagnostic code ranges for PCIe initialisation?",
+    "expected_source_tier": "rag"
+  },
+  {
+    "query": "System keeps shutting down from THERMAL_SHUTDOWN, what should I check?",
+    "expected_source_tier": "mcp"
+  },
+  {
+    "query": "How do I diagnose an out of memory error on Linux?",
+    "expected_source_tier": "mcp"
+  }
+]

@@ -1,0 +1,88 @@
+version: "3.9"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# multimodal-rag-troubleshooter · Docker Compose
+# Two app containers + one Ollama sidecar sharing a bridge network.
+# ─────────────────────────────────────────────────────────────────────────────
+
+networks:
+  rag-net:
+    driver: bridge
+
+volumes:
+  vector-store:      # ChromaDB persistence
+  ollama-models:     # Ollama downloaded model cache
+  uploads:           # User-uploaded files (PDFs, images)
+
+services:
+
+  # ── 1. Ollama — local LLM server ────────────────────────────────────────────
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - ollama-models:/root/.ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - rag-net
+    restart: unless-stopped
+    # GPU support (comment out if no NVIDIA GPU)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  # ── 2. MCP Server — FastAPI tool microservice ────────────────────────────────
+  mcp-server:
+    build:
+      context: .
+      dockerfile: services/mcp_server/Dockerfile
+    container_name: mcp-server
+    env_file: .env
+    environment:
+      MCP_API_KEY: ${MCP_API_KEY:-changeme}
+    ports:
+      - "8000:8000"
+    networks:
+      - rag-net
+    volumes:
+      - ./services/mcp_server/data:/app/data  # SQLite DB
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── 3. Streamlit UI — main app container ────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: services/app/Dockerfile
+    container_name: rag-app
+    env_file: .env
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+      MCP_SERVER_URL: http://mcp-server:8000
+      CHROMA_PERSIST_DIR: /app/vector_store
+    ports:
+      - "8501:8501"   # Streamlit UI
+      - "8080:8080"   # FastAPI internal API (optional direct access)
+    networks:
+      - rag-net
+    volumes:
+      - vector-store:/app/vector_store
+      - uploads:/app/data/uploads
+      - ./runs.jsonl:/app/runs.jsonl  # audit log on host
+    depends_on:
+      mcp-server:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    restart: unless-stopped
